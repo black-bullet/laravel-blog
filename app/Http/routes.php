@@ -11,6 +11,7 @@
 |
 */
 
+
 Route::controllers(['auth' => 'Auth\AuthController']);
 
 Route::resource('posts', 'PostController');
@@ -18,3 +19,13 @@ Route::resource('posts', 'PostController');
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::filter('manage_posts', function () {
+    if (!Entrust::hasRole('admin')) {
+        return Redirect::to('/posts');
+    }
+});
+
+Route::when('posts*', 'manage_posts', array('post', 'put', 'delete'));
+Route::when('posts/create', 'manage_posts');
+Route::when('posts/*/edit', 'manage_posts');

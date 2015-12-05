@@ -1,9 +1,11 @@
 @extends('app')
 
 @section('content')
-    <div class="form-group">
-        <button type="button" class="btn btn-primary"  onclick="window.location='{{ URL::route('posts.create') }}'">Create</button>
-    </div>
+    @if(Entrust::hasRole('admin'))
+        <div class="form-group">
+            <button type="button" class="btn btn-primary"  onclick="window.location='{{ URL::route('posts.create') }}'">Create</button>
+        </div>
+    @endif
     @foreach($posts as $post)
         <article>
             <h2>
@@ -19,7 +21,7 @@
                 published: {{ $post->created_at  }}
             </p>
             <div class="form-group">
-                <button type="button" class="btn btn-primary"  onclick="window.location='{{ URL::route('posts.show',$post->id) }}'">Edit</button>
+                <button type="button" class="btn btn-primary"  onclick="window.location='{{ URL::route('posts.show',$post->id) }}'">Detail</button>
             </div>
         </article>
     @endforeach
