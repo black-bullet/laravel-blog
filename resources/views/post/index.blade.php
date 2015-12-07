@@ -7,6 +7,7 @@
         </div>
     @endif
     @foreach($posts as $post)
+        @if($post->published)
         <article>
             <h2>
                 {{ $post->title }}
@@ -24,5 +25,6 @@
                 <button type="button" class="btn btn-primary"  onclick="window.location='{{ URL::route('posts.show',$post->id) }}'">Detail</button>
             </div>
         </article>
+        @endif
     @endforeach
 @stop

@@ -16,23 +16,26 @@
             {{ $post->title }}
         </h2>
 
-        <p>
+        <p class="post-p">
             {{ $post->content }}
         </p>
 
-        <p>
+        <p class="post-p">
             author:{{ $post->author }}
         </p>
 
-        <p>
+        <p class="post-p">
             published: {{ $post->created_at  }}
         </p>
-        <p>
+        <p class="post-p">
             comments:
         </p>
+        <hr>
             @foreach ($comments as $comment)
-                <h4>{{ $comment->name }}</h4>
-                <p>{{ $comment->comment }}</p>
+                @if($comment->published)
+                    <h4>{{ $comment->name }}</h4>
+                    <p>{{ $comment->comment }}</p>
+                @endif
             @endforeach
         <p>
             create comment:
