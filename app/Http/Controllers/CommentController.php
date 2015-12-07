@@ -14,7 +14,7 @@ class CommentController extends Controller
             'comment' => 'required',
             'post_id' => 'required'
         ]);
-
+        
         $input = $request->all();
 
         Comment::create($input);
